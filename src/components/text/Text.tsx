@@ -17,5 +17,5 @@ export const Text: FunctionComponent<TextProps> = (props: TextProps) => {
     const { textTag: TextType = "p", text: Text } = textProps;
     return <TextType>{Text}</TextType>;
   };
-  return <TextWrapper textTag={props.type} text={props.text}></TextWrapper>;
+  return <TextWrapper textTag={props.type} text={props.text}></TextWrapper>
 };
