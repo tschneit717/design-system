@@ -12,9 +12,7 @@ describe('Button ->', () => {
   const BUTTON_LABEL_STRING = 'test button label';
   const BUTTON_FUNCTION = jest.fn();
 
-  beforeEach(() => {
-    render(<Button />);
-  });
+  beforeEach(() => {});
 
   afterEach(() => {
     cleanup();
