@@ -1,7 +1,10 @@
 import { PropsWithChildren, FunctionComponent } from "react";
-
+import { Link } from "react-router-dom";
 export interface NavProps extends PropsWithChildren<any> {
-  text: string;
+  navItems: Array<{
+    link: string;
+    text: string;
+  }>;
 }
 
 export const NavEditConfig = {
@@ -13,8 +16,14 @@ export const NavEditConfig = {
 
 export const Nav: FunctionComponent<NavProps> = (props: NavProps) => {
   return (
-    <div>
-      <p>Nav</p>
-    </div>
+    <nav>
+      <ul>
+        {props.navItems.map((item) => (
+          <li key={item.link}>
+            <Link to={item.link}>{item.text}</Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };

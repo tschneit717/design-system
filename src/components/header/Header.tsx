@@ -13,8 +13,8 @@ export const HeaderEditConfig = {
 
 export const Header: FunctionComponent<HeaderProps> = (props: HeaderProps) => {
   return (
-    <div>
+    <header>
       <p>Header</p>
-    </div>
+    </header>
   );
 };
