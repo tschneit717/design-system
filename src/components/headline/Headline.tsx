@@ -6,14 +6,8 @@ export interface HeadlineProps extends PropsWithChildren<any> {
   alignment: string;
   titleTag: string;
   fontSize: string;
+  testid?: string;
 }
-
-export const HeadlineEditConfig = {
-  emptyLabel: 'Headline Component',
-  isEmpty: function (props: HeadlineProps): boolean {
-    return !props || !props.text;
-  },
-};
 
 export const Headline: FunctionComponent<HeadlineProps> = (
   props: HeadlineProps

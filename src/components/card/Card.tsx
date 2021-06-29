@@ -1,20 +1,19 @@
-import { PropsWithChildren, FunctionComponent } from "react";
+import { PropsWithChildren, FunctionComponent } from 'react';
 
 export interface CardProps extends PropsWithChildren<any> {
-  text: string;
+  text?: string;
+  title: string;
+  image: string;
+  imageAlt?: string;
+  testid?: string;
 }
-
-export const CardEditConfig = {
-  emptyLabel: "Card Component",
-  isEmpty: function (props: CardProps): boolean {
-    return !props || !props.text;
-  },
-};
 
 export const Card: FunctionComponent<CardProps> = (props: CardProps) => {
   return (
-    <div>
-      <p>Card</p>
+    <div data-testid={props.testid} className='card'>
+      <img className='card__image' src={props.image} alt={props.imageAlt} />
+      <span className='card__title'>{props.title}</span>
+      <p className='card__text'>{props.text}</p>
     </div>
   );
 };

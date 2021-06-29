@@ -11,13 +11,6 @@ export interface ButtonProps extends PropsWithChildren<any> {
   testId?: string;
 }
 
-export const ButtonEditConfig = {
-  emptyLabel: 'Button Component',
-  isEmpty: function (props: ButtonProps): boolean {
-    return !props || !props.text;
-  },
-};
-
 export const Button: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   return (
     <button

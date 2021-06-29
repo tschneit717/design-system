@@ -4,15 +4,8 @@ import { PropsWithChildren, FunctionComponent } from 'react';
 export interface AccordionProps extends PropsWithChildren<any> {
   title: string;
   body: string;
-  testid: string;
+  testid?: string;
 }
-
-export const AccordionEditConfig = {
-  emptyLabel: 'Accordion Component',
-  isEmpty: function (props: AccordionProps): boolean {
-    return !props || !props.accordionItems.length;
-  },
-};
 
 export const Accordion: FunctionComponent<AccordionProps> = (
   props: AccordionProps
