@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { PropsWithChildren, FunctionComponent } from 'react';
 
 export interface AccordionProps extends PropsWithChildren<any> {
@@ -16,26 +16,18 @@ export const AccordionEditConfig = {
   },
 };
 
-const useToggle = (initialValue = false): (boolean | (() => void))[] => {
-  const [value, setValue] = useState(initialValue);
-  const toggle = useCallback(() => {
-    setValue((v) => !v);
-  }, []);
-  return [value, toggle];
-};
-
 export const Accordion: FunctionComponent<AccordionProps> = (
   props: AccordionProps
 ) => {
-  const [isOn, toggleIsOn] = useToggle();
+  const [isOpen, toggleIsOpen] = useState(false);
   return (
     <div data-testid={props.testid}>
       {props.accordionItems.map((item) => (
         <button
           key={item.title}
-          onClick={toggleIsOn as any}
+          onClick={() => (isOpen ? toggleIsOpen(false) : toggleIsOpen(true))}
           title={item.title}
-          className={`accordion-body ${isOn ? 'open' : ''}`}>
+          className={`accordion-body ${isOpen ? 'open' : ''}`}>
           <span className='accordion-title'>{item.title}</span>
           <div>{item.body}</div>
         </button>
