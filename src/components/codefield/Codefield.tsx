@@ -4,7 +4,6 @@ import {
   useState,
   ChangeEvent,
 } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface CodefieldProps extends PropsWithChildren<any> {
   count: number;
@@ -32,7 +31,7 @@ export const Codefield: FunctionComponent<CodefieldProps> = (
 
   const handleFocus = (i: number) => {
     const inputList = document.querySelectorAll<HTMLElement>(
-      'form.codefield input'
+      'form.codefield > input'
     );
     if (i < inputList.length && i !== -1) {
       inputList[i].focus();
@@ -56,7 +55,7 @@ export const Codefield: FunctionComponent<CodefieldProps> = (
       row.push(
         <input
           className='border'
-          key={uuidv4()}
+          key={i}
           value={state[i]}
           maxLength={1}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +70,7 @@ export const Codefield: FunctionComponent<CodefieldProps> = (
 
   return (
     <form
-      key={uuidv4()}
+      key={`codefield-${props.value}`}
       data-testid={props.testid}
       name={props.value}
       className='codefield'>
