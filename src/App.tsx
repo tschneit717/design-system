@@ -1,12 +1,10 @@
-import React from 'react';
-import { Carousel } from './components/carousel/Carousel';
+import { Codefield } from './components/codefield/Codefield';
 import './assets/styles/App.css';
-import data from './static/data/slides.json';
 
 function App() {
   return (
     <div className='App'>
-      <Carousel slides={data}></Carousel>
+      <Codefield value='invite' count={4}></Codefield>
     </div>
   );
 }
