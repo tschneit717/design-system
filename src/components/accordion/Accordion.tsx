@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PropsWithChildren, FunctionComponent } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface AccordionProps extends PropsWithChildren<any> {
   title: string;
@@ -12,9 +13,8 @@ export const Accordion: FunctionComponent<AccordionProps> = (
 ) => {
   const [isOpen, toggleIsOpen] = useState(false);
   return (
-    <div className='accordion' data-testid={props.testid}>
+    <div className='accordion' key={props.title} data-testid={props.testid}>
       <button
-        key={props.title}
         onClick={() => (isOpen ? toggleIsOpen(false) : toggleIsOpen(true))}
         title={props.title}
         className={`accordion-body ${isOpen ? 'open' : ''}`}>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { PropsWithChildren, FunctionComponent } from 'react';
 import { BiCircle, BiChevronLeft, BiChevronRight } from 'react-icons/bi';
 import { FaCircle } from 'react-icons/fa';
+import { v4 as uuidv4 } from 'uuid';
 export interface CarouselProps extends PropsWithChildren<any> {
   testid?: string;
   slides: Array<{
@@ -72,7 +73,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (
             className={`carousel__slide ${
               activeSlide === index ? '--active' : ''
             }`}
-            id={slide.id}
+            id={uuidv4()}
             key={slide.id}>
             <img alt={slide.title} src={slide.image} />
             <h2>{slide.title}</h2>

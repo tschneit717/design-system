@@ -4,11 +4,13 @@ import {
   useState,
   ChangeEvent,
 } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface CodefieldProps extends PropsWithChildren<any> {
   count: number;
   value: string;
   testid?: string;
+  key?: string;
 }
 
 export const Codefield: FunctionComponent<CodefieldProps> = (
@@ -54,7 +56,7 @@ export const Codefield: FunctionComponent<CodefieldProps> = (
       row.push(
         <input
           className='border'
-          key={i}
+          key={uuidv4()}
           value={state[i]}
           maxLength={1}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
@@ -68,7 +70,11 @@ export const Codefield: FunctionComponent<CodefieldProps> = (
   };
 
   return (
-    <form data-testid={props.testid} name={props.value} className='codefield'>
+    <form
+      key={uuidv4()}
+      data-testid={props.testid}
+      name={props.value}
+      className='codefield'>
       {renderFields()}
     </form>
   );

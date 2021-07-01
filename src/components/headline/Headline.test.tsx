@@ -2,7 +2,7 @@ import { Headline } from './Headline';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 
 describe('Headline ->', () => {
   Enzyme.configure({ adapter: new Adapter() });

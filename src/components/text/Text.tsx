@@ -1,4 +1,5 @@
 import { PropsWithChildren, FunctionComponent } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface TextProps extends PropsWithChildren<any> {
   text: string;
@@ -8,7 +9,7 @@ export interface TextProps extends PropsWithChildren<any> {
 export const Text: FunctionComponent<TextProps> = (props: TextProps) => {
   const TextWrapper = (textProps: TextProps): JSX.Element => {
     const { textTag: TextType = 'p', text: Text } = textProps;
-    return <TextType>{Text}</TextType>;
+    return <TextType key={uuidv4()}>{Text}</TextType>;
   };
   return <TextWrapper textTag={props.type} text={props.text}></TextWrapper>;
 };

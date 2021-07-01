@@ -1,4 +1,5 @@
 import { PropsWithChildren, FunctionComponent } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface ButtonProps extends PropsWithChildren<any> {
   text?: string;
@@ -14,6 +15,7 @@ export interface ButtonProps extends PropsWithChildren<any> {
 export const Button: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   return (
     <button
+      key={uuidv4()}
       data-testid={props.testId}
       aria-label={props.label}
       className={`py-2 px-4 rounded text-${

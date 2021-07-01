@@ -1,5 +1,7 @@
 import { PropsWithChildren, FunctionComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
+
 export interface NavProps extends PropsWithChildren<any> {
   navItems: Array<{
     link: string;
@@ -10,10 +12,10 @@ export interface NavProps extends PropsWithChildren<any> {
 
 export const Nav: FunctionComponent<NavProps> = (props: NavProps) => {
   return (
-    <nav>
+    <nav key={uuidv4()}>
       <ul>
         {props.navItems.map((item) => (
-          <li key={item.link}>
+          <li key={uuidv4()}>
             <Link to={item.link}>{item.text}</Link>
           </li>
         ))}
