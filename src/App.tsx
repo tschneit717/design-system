@@ -10,6 +10,7 @@ import { Card } from './components/card/Card';
 import { Nav } from './components/nav/Nav';
 import { Text } from './components/text/Text';
 import { Headline } from './components/headline/Headline';
+import { Datepicker } from './components/datepicker/Datepicker';
 
 const TEST_CHILDREN_MULTIPLE = [
   <p key={uuidv4()}>Paragraph one</p>,
@@ -74,6 +75,7 @@ function App() {
   return (
     <div className='App'>
       <BrowserRouter>
+        <Datepicker></Datepicker>
         <Accordion testid='String' title='Title' body='Body'></Accordion>
         <Button></Button>
         <Card
