@@ -1,5 +1,5 @@
-import { Container } from './components/container/Container';
 import './assets/styles/App.css';
+import { Container } from './components/container/Container';
 import { BrowserRouter } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { Carousel } from './components/carousel/Carousel';

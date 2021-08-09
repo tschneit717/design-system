@@ -1,10 +1,10 @@
 import { PropsWithChildren, FunctionComponent } from 'react';
 
-export interface ModalProps extends PropsWithChildren<any> {
+export interface TabProps extends PropsWithChildren<any> {
   text: string;
 }
 
-export const Modal: FunctionComponent<ModalProps> = (props: ModalProps) => {
+export const Tab: FunctionComponent<TabProps> = (props: TabProps) => {
   return (
     <div>
       <p>Modal</p>
