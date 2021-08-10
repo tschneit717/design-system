@@ -70,6 +70,7 @@ export const Codefield: FunctionComponent<CodefieldProps> = (
 
   return (
     <form
+      data-component-type='Codefield'
       key={`codefield-${props.value}`}
       data-testid={props.testid}
       name={props.value}

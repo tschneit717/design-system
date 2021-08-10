@@ -6,7 +6,7 @@ export interface FormProps extends PropsWithChildren<any> {
 
 export const Form: FunctionComponent<FormProps> = (props: FormProps) => {
   return (
-    <div>
+    <div data-component-type='Form'>
       <p>Form</p>
     </div>
   );

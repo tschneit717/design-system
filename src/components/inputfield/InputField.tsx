@@ -8,7 +8,7 @@ export const Inputfield: FunctionComponent<InputfieldProps> = (
   props: InputfieldProps
 ) => {
   return (
-    <div>
+    <div data-component-type='Inputfield'>
       <p>Inputfield</p>
     </div>
   );

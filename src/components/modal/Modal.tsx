@@ -6,7 +6,7 @@ export interface ModalProps extends PropsWithChildren<any> {
 
 export const Modal: FunctionComponent<ModalProps> = (props: ModalProps) => {
   return (
-    <div>
+    <div data-component-type='Modal'>
       <p>Modal</p>
     </div>
   );

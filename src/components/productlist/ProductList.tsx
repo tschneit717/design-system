@@ -8,7 +8,7 @@ export const ProductList: FunctionComponent<ProductListProps> = (
   props: ProductListProps
 ) => {
   return (
-    <div>
+    <div data-component-type='ProductList'>
       <p>ProductList</p>
     </div>
   );

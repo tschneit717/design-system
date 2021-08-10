@@ -8,7 +8,7 @@ export const Profile: FunctionComponent<ProfileProps> = (
   props: ProfileProps
 ) => {
   return (
-    <div>
+    <div data-component-type='Profile'>
       <p>Profile</p>
     </div>
   );

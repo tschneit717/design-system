@@ -6,7 +6,7 @@ export interface FooterProps extends PropsWithChildren<any> {
 
 export const Footer: FunctionComponent<FooterProps> = (props: FooterProps) => {
   return (
-    <div>
+    <div data-component-type='Footer'>
       <p>Footer</p>
     </div>
   );

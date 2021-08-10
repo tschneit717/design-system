@@ -15,6 +15,7 @@ export interface ButtonProps extends PropsWithChildren<any> {
 export const Button: FunctionComponent<ButtonProps> = (props: ButtonProps) => {
   return (
     <button
+      data-component-type='Button'
       key={uuidv4()}
       data-testid={props.testId}
       aria-label={props.label}

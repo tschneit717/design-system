@@ -9,7 +9,11 @@ export interface TextProps extends PropsWithChildren<any> {
 export const Text: FunctionComponent<TextProps> = (props: TextProps) => {
   const TextWrapper = (textProps: TextProps): JSX.Element => {
     const { textTag: TextType = 'p', text: Text } = textProps;
-    return <TextType key={uuidv4()}>{Text}</TextType>;
+    return (
+      <TextType data-component-type='Text' key={uuidv4()}>
+        {Text}
+      </TextType>
+    );
   };
   return <TextWrapper textTag={props.type} text={props.text}></TextWrapper>;
 };

@@ -20,7 +20,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (
   const [activeSlide, setActiveSlide] = useState(0);
 
   const renderButtons = () => (
-    <div className='carousel__buttons'>
+    <div data-component-type='Carousel' className='carousel__buttons'>
       <button
         data-testid='previous-button'
         onClick={() =>

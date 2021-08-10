@@ -11,7 +11,11 @@ export interface CardProps extends PropsWithChildren<any> {
 
 export const Card: FunctionComponent<CardProps> = (props: CardProps) => {
   return (
-    <div key={uuidv4()} data-testid={props.testid} className='card'>
+    <div
+      data-component-type='Card'
+      key={uuidv4()}
+      data-testid={props.testid}
+      className='card'>
       <img className='card__image' src={props.image} alt={props.imageAlt} />
       <span className='card__title'>{props.title}</span>
       <p className='card__text'>{props.text}</p>

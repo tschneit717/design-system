@@ -3,7 +3,7 @@ import { PropsWithChildren, FunctionComponent } from 'react';
 
 export interface AccordionProps extends PropsWithChildren<any> {
   title: string;
-  body: string;
+  body?: string;
   testid?: string;
 }
 
@@ -12,14 +12,22 @@ export const Accordion: FunctionComponent<AccordionProps> = (
 ) => {
   const [isOpen, toggleIsOpen] = useState(false);
   return (
-    <div className='accordion' key={props.title} data-testid={props.testid}>
+    <div
+      data-component-type='Accordion'
+      className='accordion'
+      key={props.title}
+      data-testid={props.testid}>
       <button
         onClick={() => (isOpen ? toggleIsOpen(false) : toggleIsOpen(true))}
-        title={props.title}
-        className={`accordion-body ${isOpen ? 'open' : ''}`}>
+        title={props.title}>
         <span className='accordion-title'>{props.title}</span>
-        <div>{props.body}</div>
       </button>
+      <div
+        className={`accordion-body overflow-hidden ${
+          isOpen ? 'h-auto' : 'h-0'
+        }`}>
+        {props.body || props.children}
+      </div>
     </div>
   );
 };

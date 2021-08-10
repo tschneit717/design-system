@@ -6,7 +6,7 @@ export interface HeaderProps extends PropsWithChildren<any> {
 
 export const Header: FunctionComponent<HeaderProps> = (props: HeaderProps) => {
   return (
-    <header>
+    <header data-component-type='Header'>
       <p>Header</p>
     </header>
   );

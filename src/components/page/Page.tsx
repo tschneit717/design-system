@@ -6,7 +6,7 @@ export interface PageProps extends PropsWithChildren<any> {
 
 export const Page: FunctionComponent<PageProps> = (props: PageProps) => {
   return (
-    <div>
+    <div data-component-type='Page'>
       <p>Page</p>
     </div>
   );

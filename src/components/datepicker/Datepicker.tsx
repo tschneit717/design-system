@@ -69,7 +69,10 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
   }
 
   return (
-    <div data-testid={props.testid} className='datepicker'>
+    <div
+      data-component-type='Datepicker'
+      data-testid={props.testid}
+      className='datepicker'>
       <div onClick={() => toggleDatePickerOpen(!datePickerOpen)}>
         <input
           id='selected-date'

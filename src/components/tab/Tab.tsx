@@ -6,7 +6,7 @@ export interface TabProps extends PropsWithChildren<any> {
 
 export const Tab: FunctionComponent<TabProps> = (props: TabProps) => {
   return (
-    <div>
+    <div data-component-type='Tab'>
       <p>Modal</p>
     </div>
   );

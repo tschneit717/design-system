@@ -19,7 +19,10 @@ export const Headline: FunctionComponent<HeadlineProps> = (
     return <HeadlineTag className={className}>{children}</HeadlineTag>;
   };
   return (
-    <div className={`text-${props.alignment}`} key={uuidv4()}>
+    <div
+      data-component-type='Headline'
+      className={`text-${props.alignment}`}
+      key={uuidv4()}>
       <HeadlineTitle
         className={`text-${props.fontSize}`}
         titleTag={props.titleTag}>

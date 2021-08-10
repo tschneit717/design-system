@@ -8,7 +8,7 @@ export const Product: FunctionComponent<ProductProps> = (
   props: ProductProps
 ) => {
   return (
-    <div>
+    <div data-component-type='Product'>
       <p>Product</p>
     </div>
   );

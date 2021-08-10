@@ -20,7 +20,9 @@ import { Text } from '../../components/text/Text';
 
 export const componentData = [
   {
-    name: 'Accordion',
+    name: 'accordion',
+    title: 'Accordion',
+    sourceCode: '<Accordion></Accordion>',
     component: Accordion,
     details: {
       title: 'Accordion Title',
@@ -28,7 +30,9 @@ export const componentData = [
     },
   },
   {
-    name: 'Button',
+    name: 'button',
+    title: 'Button',
+    sourceCode: '<Button></Button>',
     component: Button,
     details: {
       text: 'Button Text',
@@ -41,7 +45,9 @@ export const componentData = [
     },
   },
   {
-    name: 'Card',
+    name: 'card',
+    title: 'Card',
+    sourceCode: '<Card></Card>',
     component: Card,
     details: {
       text: 'Text',
@@ -51,7 +57,9 @@ export const componentData = [
     },
   },
   {
-    name: 'Carousel',
+    name: 'carousel',
+    title: 'Carousel',
+    sourceCode: '<Carousel></Carousel>',
     component: Carousel,
     details: {
       slides: [
@@ -83,7 +91,9 @@ export const componentData = [
     },
   },
   {
-    name: 'Codefield',
+    name: 'codefield',
+    title: 'Code Field',
+    sourceCode: '<Code></Code>',
     component: Codefield,
     details: {
       count: 4,
@@ -91,42 +101,54 @@ export const componentData = [
     },
   },
   {
-    name: 'Container',
+    name: 'container',
+    title: 'Container',
+    sourceCode: '<Container></Container>',
     component: Container,
     details: {
-      children: ['<p>Container Text</p>', '<p>Container Text 2</p>'],
+      children: ['Container Text', 'Container Text 2'],
     },
   },
   {
-    name: 'Datepicker',
+    name: 'datepicker',
+    title: 'Datepicker',
+    sourceCode: '<Datepicker></Datepicker>',
     component: Datepicker,
     details: {
       text: 'Datepicker text',
     },
   },
   {
-    name: 'Footer',
+    name: 'footer',
+    title: 'Footer',
+    sourceCode: '<Footer></Footer>',
     component: Footer,
     details: {
       text: 'Footer text',
     },
   },
   {
-    name: 'Form',
+    name: 'form',
+    title: 'Form',
+    sourceCode: '<Form></Form>',
     component: Form,
     details: {
       text: 'Form text',
     },
   },
   {
-    name: 'Header',
+    name: 'header',
+    title: 'Header',
+    sourceCode: '<Header></Header>',
     component: Header,
     details: {
       text: 'Header text',
     },
   },
   {
-    name: 'Headline',
+    name: 'headline',
+    title: 'Headline',
+    sourceCode: '<Headline></Headline>',
     component: Headline,
     details: {
       titleText: 'Headline Title Text',
@@ -137,7 +159,9 @@ export const componentData = [
     },
   },
   {
-    name: 'Input field',
+    name: 'inputfield',
+    title: 'Input Field',
+    sourceCode: '<Input></Input>',
     component: Inputfield,
     details: {
       text: 'Input field text',
@@ -145,15 +169,19 @@ export const componentData = [
     },
   },
   {
-    name: 'Modal',
+    name: 'modal',
+    title: 'Modal',
+    sourceCode: '<Modal></Modal>',
     component: Modal,
     details: {
       text: 'Modal text',
     },
   },
   // {
-  //   name: 'Nav',
-  //   component: Nav,
+  //   name: 'nav',
+  //   title: 'Nav',
+  // sourceCode: '<Nav></Nav>',
+  // component: Nav,
   //   details: {
   //     navItems: [
   //       {
@@ -172,35 +200,45 @@ export const componentData = [
   //   },
   // },
   {
-    name: 'Product',
+    name: 'product',
+    title: 'Product',
+    sourceCode: '<Product></Product>',
     component: Product,
     details: {
       text: 'Product text',
     },
   },
   {
-    name: 'Product List',
+    name: 'productlist',
+    title: 'Product List',
+    sourceCode: '<Product></Product>',
     component: ProductList,
     details: {
       text: 'Porduct List text',
     },
   },
   {
-    name: 'Profile',
+    name: 'profile',
+    title: 'Profile',
+    sourceCode: '<Profile></Profile>',
     component: Profile,
     details: {
       text: 'Profile text',
     },
   },
   {
-    name: 'Tab',
+    name: 'tab',
+    title: 'Tab',
+    sourceCode: '<Tab></Tab>',
     component: Tab,
     details: {
       text: 'Tab text',
     },
   },
   {
-    name: 'Text',
+    name: 'text',
+    title: 'Text',
+    sourceCode: '<Text></Text>',
     component: Text,
     details: {
       text: 'Text text',

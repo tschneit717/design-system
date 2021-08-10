@@ -12,7 +12,7 @@ export interface NavProps extends PropsWithChildren<any> {
 
 export const Nav: FunctionComponent<NavProps> = (props: NavProps) => {
   return (
-    <nav key={uuidv4()}>
+    <nav data-component-type='Nav' key={uuidv4()}>
       <ul>
         {props.navItems.map((item) => (
           <li key={uuidv4()}>

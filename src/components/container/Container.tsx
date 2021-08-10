@@ -9,7 +9,11 @@ export const Container: FunctionComponent<ContainerProps> = (
   props: ContainerProps
 ) => {
   return (
-    <div key={uuidv4()} data-testid={props.testid} className='container'>
+    <div
+      data-component-type='Container'
+      key={uuidv4()}
+      data-testid={props.testid}
+      className='container'>
       {props.children}
     </div>
   );
