@@ -14,20 +14,22 @@ export const AtlasComponents: FunctionComponent<AtlasComponentsType> = ({
   components,
 }) => {
   return (
-    <div>
+    <div className='px-2 pt-10 pb-4 h-screen w-full overflow-y-auto'>
       {componentData.map((component, index) => {
         const uuid = uuidv4();
-        const containerId = `${component.name}-${uuid}`;
+        const containerKey = `${component.name}-${uuid}`;
         const componentHtml = `${component.sourceCode}`;
-        console.log(componentHtml);
         return (
           <div
-            className='p-4 border-2 border-dashed  w-full max-w-full'
-            key={containerId}>
+            id={component.name}
+            className='p-4 border-t-2 border-dashed  w-full max-w-full'
+            key={containerKey}>
             <h2 className='text-2xl font-bold'>{component.title}</h2>
-            {React.createElement<any>(componentData[index].component, {
-              ...component.details,
-            })}
+            <div className='my-8'>
+              {React.createElement<any>(componentData[index].component, {
+                ...component.details,
+              })}
+            </div>
             <Accordion title='Source Code'>
               <pre className='bg-gray-200 border p-4 my-2'>
                 <code>{componentHtml}</code>

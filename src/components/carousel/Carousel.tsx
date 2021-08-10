@@ -20,8 +20,11 @@ export const Carousel: FunctionComponent<CarouselProps> = (
   const [activeSlide, setActiveSlide] = useState(0);
 
   const renderButtons = () => (
-    <div data-component-type='Carousel' className='carousel__buttons'>
+    <div
+      data-component-type='Carousel'
+      className='carousel__buttons absolute flex justify-between h-full w-full top-0 left-0 items-center'>
       <button
+        className='flex items-center text-4xl'
         data-testid='previous-button'
         onClick={() =>
           setActiveSlide(
@@ -29,10 +32,10 @@ export const Carousel: FunctionComponent<CarouselProps> = (
           )
         }
         aria-label='previous'>
-        Previous
         <BiChevronLeft />
       </button>
       <button
+        className='flex items-center text-4xl'
         data-testid='next-button'
         onClick={() =>
           setActiveSlide(
@@ -40,7 +43,6 @@ export const Carousel: FunctionComponent<CarouselProps> = (
           )
         }
         aria-label='next'>
-        Next
         <BiChevronRight />
       </button>
     </div>
@@ -50,7 +52,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (
     let content = [];
     for (let i = 0; i < length; i++) {
       content.push(
-        <li key={i}>
+        <li key={i} className={i < length ? 'mr-3' : ''}>
           <button
             data-testid={`pagination-${i}`}
             onClick={() => setActiveSlide(i)}>
@@ -60,24 +62,32 @@ export const Carousel: FunctionComponent<CarouselProps> = (
       );
     }
     return (
-      <ul className='carousel__pagination'>{content.map((item) => item)}</ul>
+      <ul className='carousel__pagination flex justify-center'>
+        {content.map((item) => item)}
+      </ul>
     );
   };
   return (
-    <div data-testid={props.testid}>
-      <ul className='carousel__slides' data-testid='carousel-wrapper'>
+    <div className='relative' data-testid={props.testid}>
+      <ul className='carousel__slides relative' data-testid='carousel-wrapper'>
         {props.slides.map((slide, index) => (
           <li
             data-testid={`slide-${index}`}
-            className={`carousel__slide ${
-              activeSlide === index ? '--active' : ''
+            className={`carousel__slide relative ${
+              activeSlide === index ? '--active block' : 'hidden'
             }`}
             id={slide.id}
             key={slide.id}>
-            <img alt={slide.title} src={slide.image} />
-            <h2>{slide.title}</h2>
-            <p>{slide.text}</p>
-            <a href={slide.ctaLink}>{slide.ctaText}</a>
+            <img
+              alt={slide.title}
+              className='object-cover w-full h-full'
+              src={slide.image}
+            />
+            <div className='absolute h-full w-full pl-40 pt-8 left-0 top-0'>
+              <h2>{slide.title}</h2>
+              <p>{slide.text}</p>
+              <a href={slide.ctaLink}>{slide.ctaText}</a>
+            </div>
           </li>
         ))}
       </ul>

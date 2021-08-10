@@ -22,7 +22,9 @@ export const componentData = [
   {
     name: 'accordion',
     title: 'Accordion',
-    sourceCode: '<Accordion></Accordion>',
+    sourceCode: `<Accordion title="Accordion Title">
+  Accordion Body
+</Accordion>`,
     component: Accordion,
     details: {
       title: 'Accordion Title',
@@ -32,11 +34,19 @@ export const componentData = [
   {
     name: 'button',
     title: 'Button',
-    sourceCode: '<Button></Button>',
+    sourceCode: `<Button
+  text="Button Text"
+  function="() => console.log('clicked!')"
+  label="Label"
+  bgColor="red"
+  border="true"
+  textColor="Black"
+  id="Button Id">
+</Button>`,
     component: Button,
     details: {
       text: 'Button Text',
-      function: '',
+      function: () => console.log('clicked!'),
       label: 'Label',
       bgColor: 'red',
       border: 'true',
@@ -47,7 +57,12 @@ export const componentData = [
   {
     name: 'card',
     title: 'Card',
-    sourceCode: '<Card></Card>',
+    sourceCode: `<Card
+  text="Text"
+  title="Title"
+  image="https://via.placeholder.com/350x150"
+  imageAlt="Image Alt Text">
+</Card>`,
     component: Card,
     details: {
       text: 'Text',
@@ -59,7 +74,34 @@ export const componentData = [
   {
     name: 'carousel',
     title: 'Carousel',
-    sourceCode: '<Carousel></Carousel>',
+    sourceCode: `const slides = [
+  {
+    id: 'Slide ID 1',
+    image: 'https://via.placeholder.com/800x150',
+    title: 'Slide Title 1',
+    text: 'Slide Text 1',
+    ctaLink: '#',
+    ctaText: 'Slide Button Text 1',
+  },
+  {
+    id: 'Slide ID 2',
+    image: 'https://via.placeholder.com/800x150',
+    title: 'Slide Title 2',
+    text: 'Slide Text 2',
+    ctaLink: '#',
+    ctaText: 'Slide Button Text 2',
+  },
+  {
+    id: 'Slide ID 3',
+    image: 'https://via.placeholder.com/800x150',
+    title: 'Slide Title 3',
+    text: 'Slide Text 3',
+    ctaLink: '#',
+    ctaText: 'Slide Button Text 3',
+  },
+];
+
+<Carousel slides={slides}></Carousel>`,
     component: Carousel,
     details: {
       slides: [
@@ -93,7 +135,7 @@ export const componentData = [
   {
     name: 'codefield',
     title: 'Code Field',
-    sourceCode: '<Code></Code>',
+    sourceCode: `<Codefield count={4} value="Entry"></Codefield>`,
     component: Codefield,
     details: {
       count: 4,
@@ -103,7 +145,10 @@ export const componentData = [
   {
     name: 'container',
     title: 'Container',
-    sourceCode: '<Container></Container>',
+    sourceCode: `<Container>
+  <p>Container Text</p>
+  <p>Container Text 2</p>
+</Container>`,
     component: Container,
     details: {
       children: ['Container Text', 'Container Text 2'],
@@ -148,7 +193,12 @@ export const componentData = [
   {
     name: 'headline',
     title: 'Headline',
-    sourceCode: '<Headline></Headline>',
+    sourceCode: `<Headline titleText='Headline Title Text'
+  text='Headline Text'
+  alignment='Center'
+  titleTag='h1'
+  fontSize='lg'>
+</Headline>`,
     component: Headline,
     details: {
       titleText: 'Headline Title Text',
@@ -161,7 +211,7 @@ export const componentData = [
   {
     name: 'inputfield',
     title: 'Input Field',
-    sourceCode: '<Input></Input>',
+    sourceCode: `<Input text='Input field text' value='Input field value'></Input>`,
     component: Inputfield,
     details: {
       text: 'Input field text',
@@ -238,7 +288,7 @@ export const componentData = [
   {
     name: 'text',
     title: 'Text',
-    sourceCode: '<Text></Text>',
+    sourceCode: `<Text text='Text text' textTag='h1'></Text>`,
     component: Text,
     details: {
       text: 'Text text',

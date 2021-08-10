@@ -19,11 +19,12 @@ export const Accordion: FunctionComponent<AccordionProps> = (
       data-testid={props.testid}>
       <button
         onClick={() => (isOpen ? toggleIsOpen(false) : toggleIsOpen(true))}
-        title={props.title}>
+        title={props.title}
+        className='py-2 px-5 border'>
         <span className='accordion-title'>{props.title}</span>
       </button>
       <div
-        className={`accordion-body overflow-hidden ${
+        className={`accordion-body overflow-hidden  ${
           isOpen ? 'h-auto' : 'h-0'
         }`}>
         {props.body || props.children}

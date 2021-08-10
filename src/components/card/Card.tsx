@@ -15,10 +15,12 @@ export const Card: FunctionComponent<CardProps> = (props: CardProps) => {
       data-component-type='Card'
       key={uuidv4()}
       data-testid={props.testid}
-      className='card'>
+      className='card rounded border w-auto inline-block'>
       <img className='card__image' src={props.image} alt={props.imageAlt} />
-      <span className='card__title'>{props.title}</span>
-      <p className='card__text'>{props.text}</p>
+      <div className='p-4'>
+        <span className='card__title text-2xl'>{props.title}</span>
+        <p className='card__text'>{props.text}</p>
+      </div>
     </div>
   );
 };

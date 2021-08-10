@@ -54,7 +54,9 @@ export const Codefield: FunctionComponent<CodefieldProps> = (
     for (let i = 0; i < props.count; i++) {
       row.push(
         <input
-          className='border'
+          className={`border w-8 p-1 text-center ${
+            i < props.count - 1 ? 'mr-2' : ' '
+          } `}
           key={i}
           value={state[i]}
           maxLength={1}
@@ -74,7 +76,7 @@ export const Codefield: FunctionComponent<CodefieldProps> = (
       key={`codefield-${props.value}`}
       data-testid={props.testid}
       name={props.value}
-      className='codefield'>
+      className='codefield inline-block'>
       {renderFields()}
     </form>
   );
