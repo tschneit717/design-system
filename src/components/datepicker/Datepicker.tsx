@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { PropsWithChildren, FunctionComponent } from 'react';
-import { BiChevronLeft, BiChevronRight } from 'react-icons/bi';
+import {
+  BiChevronDown,
+  BiChevronLeft,
+  BiChevronRight,
+  BiChevronUp,
+} from 'react-icons/bi';
 
 export interface DatepickerProps extends PropsWithChildren<any> {
   text?: string;
@@ -18,10 +23,10 @@ export const formatValue = (value: number) => {
 export const Datepicker: FunctionComponent<DatepickerProps> = (
   props: DatepickerProps
 ) => {
-  const tempDate = `${new Date().getFullYear()}/${formatValue(
+  const tempDate = `${new Date().getFullYear()}-${formatValue(
     new Date().getMonth() + 1
-  )}/${formatValue(new Date().getDate())}`;
-  const [selectedDate, setSelectedDate] = useState(tempDate);
+  )}-${formatValue(new Date().getDate())}`;
+  const [selectedDate, setSelectedDate] = useState('');
   const [datePickerOpen, toggleDatePickerOpen] = useState(false);
   const [daysOfTheMonth, setDaysOfTheMonth] = useState<Date[]>();
   const [activeMonth, setActiveMonth] = useState(
@@ -30,28 +35,54 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
   const [activeYear, setActiveYear] = useState(
     new Date(tempDate).getFullYear()
   );
+  const [yearSelect, toggleYearSelect] = useState(false);
+  const [selectYears, setSelectYear] = useState<number[]>();
+  const yearRange = 20;
+
+  const yearSelector = () => {
+    const currentYear = new Date(tempDate).getFullYear();
+    const years = [];
+    let i = 0;
+
+    while (years.length <= yearRange * 2) {
+      years.push(currentYear - yearRange + i);
+      i++;
+    }
+    years.sort((a, b) => b - a);
+    setSelectYear(years);
+  };
+
+  const updateYear = (event: HTMLElement) => {
+    const date = new Date(`${event.innerText}/${activeMonth}/01`);
+    toggleYearSelect(false);
+    setActiveYear(+event.innerText);
+    generateMonth(date);
+  };
 
   const handleDateRange = (value: number, increasing: boolean) => {
+    let newMonth;
+    let newYear;
     if (increasing) {
       if (value === 12) {
-        setActiveMonth(formatValue(1));
-        setActiveYear(activeYear + 1);
-        generateMonth(new Date(`${activeYear + 1}/01/1`));
+        newMonth = 1;
+        newYear = activeYear + 1;
       } else {
-        setActiveMonth(formatValue(value + 1));
-        generateMonth(new Date(`${activeYear}/${value + 1}/1`));
+        newYear = activeYear;
+        newMonth = +activeMonth + 1;
       }
-    }
-    if (!increasing) {
+    } else {
       if (value === 1) {
-        setActiveMonth(formatValue(12));
-        setActiveYear(activeYear - 1);
-        generateMonth(new Date(`${activeYear - 1}/12/1`));
+        newMonth = 12;
+        newYear = activeYear - 1;
       } else {
-        setActiveMonth(formatValue(value - 1));
-        generateMonth(new Date(`${activeYear}/${value - 1}/1`));
+        newYear = activeYear;
+        newMonth = +activeMonth - 1;
       }
     }
+
+    setActiveYear(newYear);
+    setActiveMonth(formatValue(newMonth));
+    generateMonth(new Date(`${newYear}/${newMonth}/1`));
   };
 
   const updateSelectedDate = (e: any) => {
@@ -80,8 +111,25 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
     return monthString;
   };
 
+  const prevArrowVisibility = () => {
+    return (
+      activeYear > new Date(tempDate).getFullYear() - yearRange ||
+      (activeYear === new Date(tempDate).getFullYear() - yearRange &&
+        +activeMonth > 1)
+    );
+  };
+
+  const nextArrowVisibility = () => {
+    return (
+      activeYear < new Date(tempDate).getFullYear() + yearRange ||
+      (activeYear === new Date(tempDate).getFullYear() + yearRange &&
+        +activeMonth < 12)
+    );
+  };
+
   if (!daysOfTheMonth) {
     generateMonth(new Date(tempDate));
+    yearSelector();
   }
 
   return (
@@ -101,9 +149,30 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
       {datePickerOpen && (
         <div
           title='Datepicker Selector'
-          className='datepicker__selector text-xs rounded-2xl border'>
+          className='datepicker__selector text-xs rounded-2xl border p-3 inline-block'>
           <div className='w-full text-xl text-bold my-4 text-center'>
             {getMonthName(activeMonth)}
+            <div
+              onClick={() => toggleYearSelect(!yearSelect)}
+              className={'inline-flex ml-2 p2 relative items-center'}>
+              {activeYear}
+              {yearSelect && <BiChevronUp></BiChevronUp>}
+              {!yearSelect && <BiChevronDown></BiChevronDown>}
+              <div
+                onMouseLeave={() => toggleYearSelect(false)}
+                className={`${
+                  yearSelect ? '' : 'hidden'
+                } -left-1 top-full grid absolute bg-white border h-80 overflow-auto text-sm`}>
+                {selectYears?.map((item, index) => (
+                  <button
+                    onClick={(e) => updateYear(e.target as HTMLElement)}
+                    className={`px-4 py-2 ${index !== 0 ? 'border-t' : ''}`}
+                    key={item}>
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
           <div className='grid grid-cols-7 gap-1 text-center font-bold mb-2'>
             <span className='text-red-600'>SUN</span>
@@ -114,7 +183,7 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
             <span>FRI</span>
             <span className='text-red-600'>SAT</span>
           </div>
-          <div className='datepicker__grid grid grid-cols-7 gap-1'>
+          <div className='datepicker__grid grid grid-cols-7 grid-rows-6 gap-1'>
             {daysOfTheMonth?.map((date) => (
               <button
                 className={`col-start-${date.getDay() + 1} text-center ${
@@ -131,25 +200,33 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
               </button>
             ))}
           </div>
-          <div className='w-full flex items-center justify-center text-xl mt-4'>
+          <div className='w-full flex items-center justify-center text-xl mt-2'>
+            {console.log()}
+            {prevArrowVisibility() && (
+              <button
+                className={'mr-3'}
+                title='Previous Month'
+                onClick={() => handleDateRange(+activeMonth, false)}>
+                {<BiChevronLeft></BiChevronLeft>}
+              </button>
+            )}
             <button
-              className={'mr-3'}
-              title='Previous Month'
-              onClick={() => handleDateRange(+activeMonth, false)}>
-              {<BiChevronLeft></BiChevronLeft>}
-            </button>
-            <button
+              className={`${prevArrowVisibility() ? '' : 'ml-8'}${
+                nextArrowVisibility() ? '' : 'mr-8'
+              }`}
               onClick={(e) => updateSelectedDate(e)}
               data-testid={props.testButtonId}
               data-date={tempDate}>
               Today
             </button>
-            <button
-              className={'ml-3'}
-              title='Next Month'
-              onClick={() => handleDateRange(+activeMonth, true)}>
-              {<BiChevronRight></BiChevronRight>}
-            </button>
+            {nextArrowVisibility() && (
+              <button
+                className={'ml-3'}
+                title='Next Month'
+                onClick={() => handleDateRange(+activeMonth, true)}>
+                {<BiChevronRight></BiChevronRight>}
+              </button>
+            )}
           </div>
         </div>
       )}
