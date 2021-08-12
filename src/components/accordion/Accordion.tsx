@@ -5,6 +5,7 @@ export interface AccordionProps extends PropsWithChildren<any> {
   title: string;
   body?: string;
   testid?: string;
+  accordionTestId?: string;
 }
 
 export const Accordion: FunctionComponent<AccordionProps> = (
@@ -24,6 +25,7 @@ export const Accordion: FunctionComponent<AccordionProps> = (
         <span className='accordion-title'>{props.title}</span>
       </button>
       <div
+        data-testid={props.accordionTestId}
         className={`accordion-body overflow-hidden  ${
           isOpen ? 'h-auto' : 'h-0'
         }`}>

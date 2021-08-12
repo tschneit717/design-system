@@ -10,6 +10,7 @@ describe('Accordion ->', () => {
   const ACCORDION_TITLE = 'Title';
   const ACCORDION_BODY = 'Title';
   const TEST_ID = 'accordion-test-id';
+  const ACCORDION_BODY_TEST_ID = 'accordion-body-test-id';
 
   afterEach(() => {
     cleanup();
@@ -30,17 +31,19 @@ describe('Accordion ->', () => {
     render(
       <Accordion
         testid={TEST_ID}
+        accordionTestId={ACCORDION_BODY_TEST_ID}
         title={ACCORDION_TITLE}
         body={ACCORDION_BODY}
       />
     );
 
     const leftClick = { button: 0 };
-    const accordionItem = screen.getByTitle(ACCORDION_TITLE);
+    const accordionButton = screen.getByTitle(ACCORDION_TITLE);
+    const accordionItem = screen.getByTestId(ACCORDION_BODY_TEST_ID);
 
-    userEvent.click(accordionItem, leftClick);
-    expect(accordionItem).toHaveClass('open');
-    userEvent.click(accordionItem, leftClick);
-    expect(accordionItem).not.toHaveClass('open');
+    await userEvent.click(accordionButton, leftClick);
+    expect(accordionItem).toHaveClass('h-auto');
+    await userEvent.click(accordionButton, leftClick);
+    expect(accordionItem).toHaveClass('h-0');
   });
 });

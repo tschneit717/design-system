@@ -13,6 +13,7 @@ export interface DatepickerProps extends PropsWithChildren<any> {
   startWeekOnMonday: boolean;
   testid?: string;
   testButtonId?: string;
+  selectButtonTestId?: string;
 }
 
 export const formatValue = (value: number) => {
@@ -176,7 +177,8 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
       <div className='inline-flex items-center'>
         <span
           onClick={() => toggleDatePickerOpen(!datePickerOpen)}
-          id='selected-date'>
+          id='selected-date'
+          data-testid={props.selectButtonTestId}>
           {selectedDate.replace(/-/g, '/')}
         </span>
         <button
