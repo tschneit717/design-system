@@ -5,10 +5,12 @@ import {
   BiChevronLeft,
   BiChevronRight,
   BiChevronUp,
+  BiX,
 } from 'react-icons/bi';
 
 export interface DatepickerProps extends PropsWithChildren<any> {
   text?: string;
+  startWeekOnMonday: boolean;
   testid?: string;
   testButtonId?: string;
 }
@@ -26,7 +28,7 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
   const tempDate = `${new Date().getFullYear()}-${formatValue(
     new Date().getMonth() + 1
   )}-${formatValue(new Date().getDate())}`;
-  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState('yyyy/mm/dd');
   const [datePickerOpen, toggleDatePickerOpen] = useState(false);
   const [daysOfTheMonth, setDaysOfTheMonth] = useState<Date[]>();
   const [activeMonth, setActiveMonth] = useState(
@@ -127,29 +129,68 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
     );
   };
 
+  const shiftWeekDays = (dayOfTheWeek: number) => {
+    if (props.startWeekOnMonday) {
+      let newColumn = dayOfTheWeek - 1;
+      if (newColumn === 0) {
+        return 7;
+      }
+      return newColumn;
+    }
+    return dayOfTheWeek;
+  };
+  const renderWeekDays = () => {
+    const daysOfTheWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    let daysArray = daysOfTheWeek;
+    if (props.startWeekOnMonday) {
+      const [first, ...rest] = daysArray;
+      daysArray = [...rest, first];
+    }
+    return daysArray.map((item) => (
+      <span
+        key={item}
+        className={
+          item.includes('SUN') || item.includes('SAT') ? 'text-red-600' : ''
+        }>
+        {item}
+      </span>
+    ));
+  };
+
   if (!daysOfTheMonth) {
     generateMonth(new Date(tempDate));
     yearSelector();
+    renderWeekDays();
   }
+
+  const resetDate = () => {
+    setSelectedDate('yyyy/mm/dd');
+    toggleDatePickerOpen(false);
+  };
 
   return (
     <div
       data-component-type='Datepicker'
       data-testid={props.testid}
-      className='datepicker'>
-      <div onClick={() => toggleDatePickerOpen(!datePickerOpen)}>
-        <input
-          id='selected-date'
-          onClick={(e) => e.preventDefault()}
-          onChange={() => setSelectedDate(selectedDate)}
-          value={selectedDate}
-          type='date'
-        />
+      className='datepicker relative'>
+      <div className='inline-flex items-center'>
+        <span
+          onClick={() => toggleDatePickerOpen(!datePickerOpen)}
+          id='selected-date'>
+          {selectedDate.replace(/-/g, '/')}
+        </span>
+        <button
+          className={`ml-4 ${
+            selectedDate !== 'yyyy/mm/dd' ? 'block' : 'hidden'
+          }`}
+          onClick={() => resetDate()}>
+          <BiX></BiX>
+        </button>
       </div>
       {datePickerOpen && (
         <div
           title='Datepicker Selector'
-          className='datepicker__selector text-xs rounded-2xl border p-3 inline-block'>
+          className='datepicker__selector text-xs rounded-2xl border p-3 inline-block absolute left-0 top-full bg-white'>
           <div className='w-full text-xl text-bold my-4 text-center'>
             {getMonthName(activeMonth)}
             <div
@@ -175,19 +216,21 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
             </div>
           </div>
           <div className='grid grid-cols-7 gap-1 text-center font-bold mb-2'>
-            <span className='text-red-600'>SUN</span>
-            <span>MON</span>
-            <span>TUES</span>
-            <span>WES</span>
-            <span>THURS</span>
-            <span>FRI</span>
-            <span className='text-red-600'>SAT</span>
+            {renderWeekDays()}
           </div>
           <div className='datepicker__grid grid grid-cols-7 grid-rows-6 gap-1'>
             {daysOfTheMonth?.map((date) => (
               <button
-                className={`col-start-${date.getDay() + 1} text-center ${
-                  date.getDay() + 1 === 1 || date.getDay() + 1 === 7
+                className={`col-start-${shiftWeekDays(
+                  date.getDay() + 1
+                )} text-center ${
+                  props.startWeekOnMonday
+                    ? shiftWeekDays(date.getDay() + 1) === 6 ||
+                      shiftWeekDays(date.getDay() + 1) === 7
+                      ? 'text-red-600'
+                      : ''
+                    : shiftWeekDays(date.getDay() + 1) === 1 ||
+                      shiftWeekDays(date.getDay() + 1) === 7
                     ? 'text-red-600'
                     : ''
                 }`}
@@ -201,7 +244,6 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
             ))}
           </div>
           <div className='w-full flex items-center justify-center text-xl mt-2'>
-            {console.log()}
             {prevArrowVisibility() && (
               <button
                 className={'mr-3'}
