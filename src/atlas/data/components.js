@@ -157,10 +157,17 @@ export const componentData = [
   {
     name: 'datepicker',
     title: 'Datepicker',
-    sourceCode: '<Datepicker></Datepicker>',
+    sourceCode: `<Datepicker 
+  startWeekOnMonday="true"  
+  includeNegativeYears="true"
+  includePositiveYears="true">
+</Datepicker>`,
     component: Datepicker,
     details: {
       text: 'Datepicker text',
+      startWeekOnMonday: true,
+      includeNegativeYears: true,
+      includePositiveYears: true,
     },
   },
   {

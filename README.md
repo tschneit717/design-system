@@ -1,6 +1,9 @@
 # Custom Design System
 Created by Tom Schneider
 
+## What is this
+This project includes a component library with tests set up for each component. There is also a folder for an application called "Atlas", which is a design system viewer. Components will be rendered with their source code and will have a feature that allows their props and state to be modified directly on page.
+
 ## Available Scripts
 
 ### `npm run dev`

@@ -11,6 +11,9 @@ import {
 export interface DatepickerProps extends PropsWithChildren<any> {
   text?: string;
   startWeekOnMonday: boolean;
+  yearRange?: number;
+  includeNegativeYears: boolean;
+  includePositiveYears: boolean;
   testid?: string;
   testButtonId?: string;
   selectButtonTestId?: string;
@@ -40,25 +43,41 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
   );
   const [yearSelect, toggleYearSelect] = useState(false);
   const [selectYears, setSelectYear] = useState<number[]>();
-  const yearRange = 20;
+  const yearRange = props.yearRange || 20;
 
   const yearSelector = () => {
     const currentYear = new Date(tempDate).getFullYear();
     const years = [];
     let i = 0;
-
-    while (years.length <= yearRange * 2) {
-      years.push(currentYear - yearRange + i);
-      i++;
+    const { includeNegativeYears, includePositiveYears } = props;
+    switch (true) {
+      case includeNegativeYears && includePositiveYears:
+        while (years.length <= yearRange * 2) {
+          years.push(currentYear - yearRange + i);
+          i++;
+        }
+        break;
+      case includeNegativeYears:
+        while (years.length <= yearRange) {
+          years.push(currentYear - yearRange + i);
+          i++;
+        }
+        break;
+      case includePositiveYears:
+        while (years.length <= yearRange) {
+          years.push(currentYear + i);
+          i++;
+        }
+        break;
     }
     years.sort((a, b) => b - a);
     setSelectYear(years);
   };
 
-  const updateYear = (event: HTMLElement) => {
-    const date = new Date(`${event.innerText}/${activeMonth}/01`);
+  const updateYear = (value: number) => {
+    const date = new Date(`${value}/${activeMonth}/01`);
     toggleYearSelect(false);
-    setActiveYear(+event.innerText);
+    setActiveYear(value);
     generateMonth(date);
   };
 
@@ -140,6 +159,7 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
     }
     return dayOfTheWeek;
   };
+
   const renderWeekDays = () => {
     const daysOfTheWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     let daysArray = daysOfTheWeek;
@@ -194,11 +214,12 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
           title='Datepicker Selector'
           className='datepicker__selector text-xs rounded-2xl border p-3 inline-block absolute left-0 top-full bg-white'>
           <div className='w-full text-xl text-bold my-4 text-center'>
-            {getMonthName(activeMonth)}
+            <span title='Active Month'>{getMonthName(activeMonth)}</span>
             <div
               onClick={() => toggleYearSelect(!yearSelect)}
+              title='Year Select'
               className={'inline-flex ml-2 p2 relative items-center'}>
-              {activeYear}
+              <span>{activeYear}</span>
               {yearSelect && <BiChevronUp></BiChevronUp>}
               {!yearSelect && <BiChevronDown></BiChevronDown>}
               <div
@@ -208,7 +229,8 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
                 } -left-1 top-full grid absolute bg-white border h-80 overflow-auto text-sm`}>
                 {selectYears?.map((item, index) => (
                   <button
-                    onClick={(e) => updateYear(e.target as HTMLElement)}
+                    id={`year-selector-${item}`}
+                    onClick={() => updateYear(item)}
                     className={`px-4 py-2 ${index !== 0 ? 'border-t' : ''}`}
                     key={item}>
                     {item}
@@ -237,9 +259,9 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
                     : ''
                 }`}
                 key={date.toISOString()}
-                data-date={`${date.getFullYear()}-${formatValue(
+                data-date={`${date.getFullYear()}/${formatValue(
                   date.getMonth() + 1
-                )}-${formatValue(date.getDate())}`}
+                )}/${formatValue(date.getDate())}`}
                 onClick={(e) => updateSelectedDate(e)}>
                 {date.getDate()}
               </button>
@@ -258,7 +280,11 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
               className={`${prevArrowVisibility() ? '' : 'ml-8'}${
                 nextArrowVisibility() ? '' : 'mr-8'
               }`}
-              onClick={(e) => updateSelectedDate(e)}
+              onClick={(e) => {
+                updateSelectedDate(e);
+                setActiveYear(new Date(tempDate).getFullYear());
+                formatValue(new Date(tempDate).getMonth() + 1);
+              }}
               data-testid={props.testButtonId}
               data-date={tempDate}>
               Today
