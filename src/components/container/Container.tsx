@@ -13,7 +13,7 @@ export const Container: FunctionComponent<ContainerProps> = (
       data-component-type='Container'
       key={uuidv4()}
       data-testid={props.testid}
-      className='container'>
+      className='container block'>
       {props.children}
     </div>
   );

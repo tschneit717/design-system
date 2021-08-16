@@ -1,3 +1,4 @@
+import React from 'react';
 import { Accordion } from '../../components/accordion/Accordion';
 import { Button } from '../../components/button/Button';
 import { Card } from '../../components/card/Card';
@@ -7,6 +8,7 @@ import { Container } from '../../components/container/Container';
 import { Datepicker } from '../../components/datepicker/Datepicker';
 import { Footer } from '../../components/footer/Footer';
 import { Form } from '../../components/form/Form';
+import { Grid } from '../../components/grid/Grid';
 import { Header } from '../../components/header/Header';
 import { Headline } from '../../components/headline/Headline';
 import { Inputfield } from '../../components/inputfield/InputField';
@@ -151,7 +153,10 @@ export const componentData = [
 </Container>`,
     component: Container,
     details: {
-      children: ['Container Text', 'Container Text 2'],
+      children: [
+        <p key='container-1'>Container Text</p>,
+        <p key='container-2'>Container Text 2</p>,
+      ],
     },
   },
   {
@@ -173,10 +178,38 @@ export const componentData = [
   {
     name: 'footer',
     title: 'Footer',
-    sourceCode: '<Footer></Footer>',
+    sourceCode: `<Footer gridCount="3" text="Footer text goes here">
+  <div>
+    Test Column 1
+  </div>
+  <div>
+    Test Column 2
+  </div>
+  <div>
+    Test Column 3
+  </div>
+  <div>
+    Test Column 4
+  </div>
+</Footer>`,
     component: Footer,
     details: {
       text: 'Footer text',
+      gridCount: '3',
+      children: [
+        <div key='footer-1' className=''>
+          Test Item 1
+        </div>,
+        <div key='footer-2' className=''>
+          Test Item 2
+        </div>,
+        <div key='footer-3' className=''>
+          Test Item 3
+        </div>,
+        <div key='footer-4' className=''>
+          Test Item 4
+        </div>,
+      ],
     },
   },
   {
@@ -186,6 +219,30 @@ export const componentData = [
     component: Form,
     details: {
       text: 'Form text',
+    },
+  },
+  {
+    name: 'grid',
+    title: 'Grid',
+    sourceCode: `<Grid></Grid>`,
+    component: Grid,
+    details: {
+      columnCount: '4',
+      rowCount: '2',
+      children: [
+        <div key='grid-1' className=''>
+          Test Item 1
+        </div>,
+        <div key='grid-2' className=''>
+          Test Item 2
+        </div>,
+        <div key='grid-3' className=''>
+          Test Item 3
+        </div>,
+        <div key='grid-4' className=''>
+          Test Item 4
+        </div>,
+      ],
     },
   },
   {
