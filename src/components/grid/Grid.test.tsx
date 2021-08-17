@@ -14,6 +14,7 @@ describe('Grid ->', () => {
     <div key='child-6'>Grid Item 6</div>,
     <div key='child-7'>Grid Item 7</div>,
   ];
+
   afterEach(() => {
     cleanup();
   });

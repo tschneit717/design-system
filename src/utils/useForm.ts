@@ -18,10 +18,6 @@ export default function useForm(initial = {}) {
     });
   }
 
-  function resetForm() {
-    setInputs(initial);
-  }
-
   function clearForm() {
     const blankState = Object.fromEntries(
       Object.entries(inputs).map(([key, value]) => [key, ''])
@@ -29,5 +25,5 @@ export default function useForm(initial = {}) {
     setInputs(blankState);
   }
 
-  return { inputs, handleChange, resetForm, clearForm };
+  return { inputs, handleChange, clearForm };
 }

@@ -5,6 +5,7 @@ export const AtlasMenu = () => {
   return (
     <nav className='p-8 w-52 h-screen border-r'>
       <ul>
+        <li className='font-bold text-2xl'>Components</li>
         {componentData.map((component, index) => {
           const uuid = uuidv4();
           const containerId = `${component.name}-${uuid}`;

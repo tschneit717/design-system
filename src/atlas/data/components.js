@@ -11,7 +11,7 @@ import { Form } from '../../components/form/Form';
 import { Grid } from '../../components/grid/Grid';
 import { Header } from '../../components/header/Header';
 import { Headline } from '../../components/headline/Headline';
-import { Inputfield } from '../../components/inputfield/InputField';
+import { InputField } from '../../components/inputfield/InputField';
 import { Modal } from '../../components/modal/Modal';
 import { Nav } from '../../components/nav/Nav';
 import { Product } from '../../components/product/Product';
@@ -19,6 +19,11 @@ import { ProductList } from '../../components/productlist/ProductList';
 import { Profile } from '../../components/profile/Profile';
 import { Tab } from '../../components/tab/Tab';
 import { Text } from '../../components/text/Text';
+
+const inputFields = [
+  { name: 'Name', type: 'text', label: 'Name' },
+  { name: 'Address', type: 'text', label: 'Address' },
+];
 
 export const componentData = [
   {
@@ -215,10 +220,17 @@ export const componentData = [
   {
     name: 'form',
     title: 'Form',
-    sourceCode: '<Form></Form>',
+    sourceCode: `
+const inputFields = [
+  { name: 'Name', type: 'text', label: 'Name' },
+  { name: 'Address', type: 'text', label: 'Address' },
+];
+
+<Form inputFields={inputFields}></Form>`,
     component: Form,
     details: {
-      text: 'Form text',
+      inputFields: inputFields,
+      testId: 'testid',
     },
   },
   {
@@ -275,11 +287,12 @@ export const componentData = [
   {
     name: 'inputfield',
     title: 'Input Field',
-    sourceCode: `<Input text='Input field text' value='Input field value'></Input>`,
-    component: Inputfield,
+    sourceCode: `<InputField label='Name' name='name' type='text'></InputField>`,
+    component: InputField,
     details: {
-      text: 'Input field text',
-      value: 'Input field value',
+      name: 'name',
+      label: 'Name',
+      type: 'text',
     },
   },
   {
