@@ -29,6 +29,7 @@ export const InputField: FunctionComponent<InputFieldProps> = ({
         name={name.toLowerCase()}
         type={type}
         value={value}
+        data-testid={`input-for-${name}`}
         placeholder={placeholder}
         onChange={handleChange ? (e) => handleChange(e) : () => null}
       />
