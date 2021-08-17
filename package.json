@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll",
     "build:css": "postcss src/assets/styles/tailwind.css -o dist/tailwind.css",
     "dev": "parcel serve ./public/index.html",
     "atlas": "parcel serve ./public/atlas.html --port 1111",
@@ -47,6 +47,14 @@
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/index.tsx",
+      "!src/atlas/index.tsx",
+      "!src/atlas/data/components.js "
+    ]
   },
   "eslintConfig": {
     "extends": [

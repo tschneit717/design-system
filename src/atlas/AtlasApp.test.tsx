@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import App from './App';
-describe('App ->', () => {
+import { AtlasApp } from './AtlasApp';
+describe('AtlasApp ->', () => {
   test('renders basic app on page', () => {
-    render(<App />);
+    render(<AtlasApp />);
   });
 });
