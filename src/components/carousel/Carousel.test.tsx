@@ -8,7 +8,6 @@ describe('Carousel ->', () => {
   Enzyme.configure({ adapter: new Adapter() });
 
   const TEST_CAROUSEL_WRAPPER_ID = 'test-wrapper-id';
-  const TEST_CAROUSEL_ACTIVE_SLIDE_FUNC = jest.fn();
   const TEST_SINGLE_SLIDE = [
     {
       id: 'test-id-0',
