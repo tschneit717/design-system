@@ -3,6 +3,7 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { cleanup, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('Button ->', () => {
   Enzyme.configure({ adapter: new Adapter() });
@@ -11,6 +12,7 @@ describe('Button ->', () => {
   const BUTTON_TEXT_STRING = 'test button text';
   const BUTTON_LABEL_STRING = 'test button label';
   const BUTTON_FUNCTION = jest.fn();
+  const BUTTON_COLOR_FUNCTION = jest.fn();
 
   beforeEach(() => {});
 
@@ -105,5 +107,12 @@ describe('Button ->', () => {
 
     expect(buttonElement).toHaveClass('text-black');
     expect(buttonElement).toHaveClass('bg-white');
+  });
+
+  test('expect nothing to happen when the button is clicked with no function passed', async () => {
+    render(<Button testId={TEST_BUTTON_ID} label={BUTTON_LABEL_STRING} />);
+    const buttonElement = await screen.findByTestId(TEST_BUTTON_ID);
+
+    expect(await userEvent.click(buttonElement)).toBeUndefined();
   });
 });

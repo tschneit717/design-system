@@ -12,12 +12,6 @@ export interface ButtonProps extends PropsWithChildren<any> {
   testId?: string;
 }
 
-const manageColor = (color: string, type: string) => {
-  return color !== 'white' && color !== 'black'
-    ? `${type}-${color}-400`
-    : `${type}-${color}`;
-};
-
 export const Button: FunctionComponent<ButtonProps> = ({
   textColor = 'black',
   bgColor = 'white',
@@ -27,6 +21,12 @@ export const Button: FunctionComponent<ButtonProps> = ({
   text,
   buttonFunction,
 }: ButtonProps) => {
+  const manageColor = (color: string, type: string) => {
+    return color !== 'white' && color !== 'black'
+      ? `${type}-${color}-400`
+      : `${type}-${color}`;
+  };
+
   return (
     <button
       data-component-type='Button'
