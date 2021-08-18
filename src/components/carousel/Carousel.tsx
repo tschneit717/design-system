@@ -52,7 +52,7 @@ export const Carousel: FunctionComponent<CarouselProps> = (
     let content = [];
     for (let i = 0; i < length; i++) {
       content.push(
-        <li key={i} className={i < length ? 'mr-3' : ''}>
+        <li key={i} className={i < length - 1 ? 'mr-3' : ''}>
           <button
             data-testid={`pagination-${i}`}
             onClick={() => setActiveSlide(i)}>

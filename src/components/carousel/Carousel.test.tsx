@@ -8,6 +8,7 @@ describe('Carousel ->', () => {
   Enzyme.configure({ adapter: new Adapter() });
 
   const TEST_CAROUSEL_WRAPPER_ID = 'test-wrapper-id';
+  const TEST_CAROUSEL_ACTIVE_SLIDE_FUNC = jest.fn();
   const TEST_SINGLE_SLIDE = [
     {
       id: 'test-id-0',
@@ -86,6 +87,18 @@ describe('Carousel ->', () => {
     expect(actual).toBeFalsy();
   });
 
+  test('Renders pagination and they have the correct styling', async () => {
+    render(<Carousel testid={TEST_CAROUSEL_WRAPPER_ID} slides={TEST_SLIDES} />);
+
+    const carouselPaginationButtons = document.querySelectorAll(
+      `.carousel__pagination li`
+    );
+    expect(carouselPaginationButtons[0]).toHaveClass('mr-3');
+    const carouselPaginationButtonLast =
+      carouselPaginationButtons[carouselPaginationButtons.length - 1];
+    expect(carouselPaginationButtonLast).not.toHaveClass('mr-3');
+  });
+
   test('Clicking the previous button will change the active slide to the previous slide', async () => {
     render(<Carousel testid={TEST_CAROUSEL_WRAPPER_ID} slides={TEST_SLIDES} />);
 
@@ -97,6 +110,10 @@ describe('Carousel ->', () => {
     expect(activeSlide).not.toHaveClass('--active');
 
     activeSlide = await screen.findByTestId(`slide-${TEST_SLIDES.length - 1}`);
+    expect(activeSlide).toHaveClass('--active');
+
+    userEvent.click(previousButton);
+    activeSlide = await screen.findByTestId(`slide-${TEST_SLIDES.length - 2}`);
     expect(activeSlide).toHaveClass('--active');
   });
 
@@ -111,6 +128,38 @@ describe('Carousel ->', () => {
     expect(activeSlide).not.toHaveClass('--active');
 
     activeSlide = await screen.findByTestId(`slide-1`);
+    expect(activeSlide).toHaveClass('--active');
+
+    userEvent.click(nextButton);
+    activeSlide = await screen.findByTestId(`slide-2`);
+    expect(activeSlide).toHaveClass('--active');
+
+    userEvent.click(nextButton);
+    activeSlide = await screen.findByTestId(`slide-3`);
+    expect(activeSlide).toHaveClass('--active');
+
+    userEvent.click(nextButton);
+    activeSlide = await screen.findByTestId(`slide-0`);
+    expect(activeSlide).toHaveClass('--active');
+  });
+
+  test('Clicking the pagination will change the active slide', async () => {
+    render(<Carousel testid={TEST_CAROUSEL_WRAPPER_ID} slides={TEST_SLIDES} />);
+
+    const paginationItem0 = await screen.findByTestId('pagination-0');
+    const paginationItem1 = await screen.findByTestId('pagination-1');
+
+    let activeSlide = await screen.findByTestId('slide-0');
+    expect(activeSlide).toHaveClass('--active');
+
+    userEvent.click(paginationItem1);
+    expect(activeSlide).not.toHaveClass('--active');
+
+    activeSlide = await screen.findByTestId(`slide-1`);
+    expect(activeSlide).toHaveClass('--active');
+
+    userEvent.click(paginationItem0);
+    activeSlide = await screen.findByTestId('slide-0');
     expect(activeSlide).toHaveClass('--active');
   });
 });
