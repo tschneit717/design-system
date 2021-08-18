@@ -53,7 +53,6 @@ export const componentData = [
     component: Button,
     details: {
       text: 'Button Text',
-      function: () => console.log('clicked!'),
       label: 'Label',
       bgColor: 'red',
       border: 'true',

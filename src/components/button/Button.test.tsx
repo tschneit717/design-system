@@ -41,9 +41,69 @@ describe('Button ->', () => {
 
   test('renders when a function prop is provided and clicked', async () => {
     const wrapper = shallow(
-      <Button testId={TEST_BUTTON_ID} function={BUTTON_FUNCTION} />
+      <Button testId={TEST_BUTTON_ID} buttonFunction={BUTTON_FUNCTION} />
     );
     wrapper.find('button').simulate('click');
     expect(BUTTON_FUNCTION.mock.calls.length).toEqual(1);
+  });
+
+  test('renders the the correct color text if passed a color prop', async () => {
+    render(
+      <Button
+        testId={TEST_BUTTON_ID}
+        label={BUTTON_LABEL_STRING}
+        textColor='red'
+      />
+    );
+    const buttonElement = await screen.findByTestId(TEST_BUTTON_ID);
+    expect(buttonElement).toHaveClass('text-red-400');
+    expect(buttonElement).not.toHaveClass('text-red');
+  });
+
+  test('renders the the correct white text if passed a color "white" prop', async () => {
+    render(
+      <Button
+        testId={TEST_BUTTON_ID}
+        label={BUTTON_LABEL_STRING}
+        textColor='white'
+      />
+    );
+    const buttonElement = await screen.findByTestId(TEST_BUTTON_ID);
+    expect(buttonElement).toHaveClass('text-white');
+    expect(buttonElement).not.toHaveClass('text-white-400');
+  });
+
+  test('renders the correct background color when passed a color', async () => {
+    render(
+      <Button
+        testId={TEST_BUTTON_ID}
+        label={BUTTON_LABEL_STRING}
+        bgColor='red'
+      />
+    );
+    const buttonElement = await screen.findByTestId(TEST_BUTTON_ID);
+    expect(buttonElement).toHaveClass('bg-red-400');
+    expect(buttonElement).not.toHaveClass('bg-red');
+  });
+
+  test('renders the correct background color as white when passed the color white', async () => {
+    render(
+      <Button
+        testId={TEST_BUTTON_ID}
+        label={BUTTON_LABEL_STRING}
+        bgColor='white'
+      />
+    );
+    const buttonElement = await screen.findByTestId(TEST_BUTTON_ID);
+    expect(buttonElement).toHaveClass('bg-white');
+    expect(buttonElement).not.toHaveClass('bg-white-400');
+  });
+
+  test('renders correctly with no colors passed to it', async () => {
+    render(<Button testId={TEST_BUTTON_ID} label={BUTTON_LABEL_STRING} />);
+    const buttonElement = await screen.findByTestId(TEST_BUTTON_ID);
+
+    expect(buttonElement).toHaveClass('text-black');
+    expect(buttonElement).toHaveClass('bg-white');
   });
 });
