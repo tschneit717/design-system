@@ -6,13 +6,13 @@ import { InputField, InputFieldProps } from '../inputfield/InputField';
 export interface FormProps extends PropsWithChildren<any> {
   inputFields: InputFieldProps[];
   testId?: string;
-  postURL?: string;
+  submitForm: Function;
 }
 
 export const Form: FunctionComponent<FormProps> = ({
   inputFields,
   testId,
-  postURL,
+  submitForm,
 }: FormProps) => {
   const defaultState = Object.fromEntries(
     Object.entries(inputFields).map(([key, value]) => {
@@ -22,31 +22,42 @@ export const Form: FunctionComponent<FormProps> = ({
   const { clearForm, inputs, handleChange } = useForm(defaultState);
 
   const [responseText, setResponseText] = useState('');
+  const [errorStatus, setErrorStatus] = useState('');
+  const requiredFields: Array<string> = [];
+  Object.entries(inputFields).map(([key, item]) => {
+    if (item.isRequired === true) {
+      requiredFields.push(item.name.toLowerCase());
+    }
+  });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (postURL) {
-      try {
-        fetch(postURL, {
-          method: 'POST',
-          body: JSON.stringify(inputs),
-        });
-        setResponseText('Success');
-      } catch (error) {
-        setResponseText(`Error: ${error.message}`);
+    let errorMessage = '';
+    Object.entries(inputs).forEach(([key, value]) => {
+      if (requiredFields.includes(key.toLowerCase()) && value === '') {
+        errorMessage = `${key} is missing a value`;
+        return;
       }
-    }
+      if (errorMessage) {
+        setErrorStatus(errorMessage);
+        return;
+      } else {
+        submitForm(inputs);
+        setResponseText('Success');
+      }
+    });
   };
-
   return (
     <form
-      onSubmit={(e) => handleSubmit(e)}
+      onSubmit={(e: FormEvent) => handleSubmit(e)}
       data-testid={testId}
       data-component-type='Form'>
-      {responseText && <div>{responseText}</div>}
+      {responseText && !errorStatus && <div>{responseText}</div>}
+      {errorStatus && <div className='text-red-400'>Error: {errorStatus}</div>}
       <div>
         {inputFields.map((item) => (
           <InputField
+            isRequired={item.isRequired}
             key={item.name.toLowerCase()}
             label={item.label}
             name={item.name.toLowerCase()}

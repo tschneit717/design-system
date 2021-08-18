@@ -1,15 +1,18 @@
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { server } from '../../utils/server';
 import { Form } from './Form';
 
 describe('Form ->', () => {
+  Enzyme.configure({ adapter: new Adapter() });
   const FORM_TEST_ID = 'form-test-id';
   const FORM_FIELDS = [
-    { name: 'Name', type: 'text', label: 'Name' },
-    { name: 'Address', type: 'text', label: 'Address' },
+    { name: 'Name', type: 'text', label: 'Name', isRequired: true },
+    { name: 'Address', type: 'text', label: 'Address', isRequired: false },
   ];
-  const FORM_DUMMY_URL = '/test/post';
+  const FORM_DUMMY_FUNC = jest.fn();
 
   beforeAll(() => {
     server.listen();
@@ -17,7 +20,7 @@ describe('Form ->', () => {
   beforeEach(() => {
     render(
       <Form
-        postURL={FORM_DUMMY_URL}
+        submitForm={FORM_DUMMY_FUNC}
         inputFields={FORM_FIELDS}
         testId={FORM_TEST_ID}></Form>
     );
@@ -68,7 +71,23 @@ describe('Form ->', () => {
 
     const submitButton = screen.getByTestId('submit-form');
     userEvent.click(submitButton);
-
+    expect(FORM_DUMMY_FUNC).toHaveBeenCalled();
     expect(await screen.findByText(/Success/i)).toBeInTheDocument();
+  });
+
+  test('Show an error message if there is something wrong with the API', async () => {
+    cleanup();
+    render(
+      <Form
+        submitForm={FORM_DUMMY_FUNC}
+        inputFields={FORM_FIELDS}
+        testId={FORM_TEST_ID}></Form>
+    );
+
+    const submitButton = await screen.findByTestId('submit-form');
+    userEvent.click(submitButton);
+
+    const errorText = await screen.findByText(/Error/i);
+    expect(errorText).toBeInTheDocument();
   });
 });

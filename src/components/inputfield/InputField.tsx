@@ -8,6 +8,7 @@ export interface InputFieldProps extends PropsWithChildren<any> {
   testId?: string;
   handleChange?: any;
   value?: any;
+  isRequired: boolean;
 }
 export const InputField: FunctionComponent<InputFieldProps> = ({
   name,
@@ -17,6 +18,7 @@ export const InputField: FunctionComponent<InputFieldProps> = ({
   testId,
   handleChange,
   value,
+  isRequired = false,
 }: InputFieldProps) => {
   return (
     <label
@@ -28,6 +30,7 @@ export const InputField: FunctionComponent<InputFieldProps> = ({
         className='block border rounded border-gray-100'
         name={name.toLowerCase()}
         type={type}
+        required={isRequired}
         value={value}
         data-testid={`input-for-${name}`}
         placeholder={placeholder}
