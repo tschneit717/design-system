@@ -12,7 +12,6 @@ describe('Button ->', () => {
   const BUTTON_TEXT_STRING = 'test button text';
   const BUTTON_LABEL_STRING = 'test button label';
   const BUTTON_FUNCTION = jest.fn();
-  const BUTTON_COLOR_FUNCTION = jest.fn();
 
   beforeEach(() => {});
 
