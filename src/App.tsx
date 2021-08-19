@@ -3,6 +3,7 @@ import { Container } from './components/container/Container';
 import { BrowserRouter } from 'react-router-dom';
 import { Nav } from './components/nav/Nav';
 import { Text } from './components/text/Text';
+import { Modal } from './components/modal/Modal';
 
 const NAV_TEST_ITEMS = [
   {

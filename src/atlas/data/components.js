@@ -300,7 +300,14 @@ const inputFields = [
     sourceCode: '<Modal></Modal>',
     component: Modal,
     details: {
-      text: 'Modal text',
+      triggerText: 'Modal text',
+      modalTitle: 'Modal Title',
+      triggerTitle: 'Modal Trigger Title ',
+      children: [
+        <div key='modal-1'>
+          <p>Modal Body</p>
+        </div>,
+      ],
     },
   },
   // {
