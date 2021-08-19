@@ -9,6 +9,7 @@ describe('Input field ->', () => {
   const INPUT_FIELD_TYPE_TEXT = 'text';
   const INPUT_FIELD_FUNC = jest.fn();
   const INPUT_FIELD_TYPE_NUMBER = 'number';
+  const INPUT_FIELD_TYPE_FILE = 'file';
 
   afterEach(() => {
     cleanup();

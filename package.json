@@ -53,7 +53,8 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/index.tsx",
       "!src/atlas/index.tsx",
-      "!src/atlas/data/components.js"
+      "!src/atlas/data/components.js",
+      "!src/utils/*.{js,jsx,ts,tsx}"
     ]
   },
   "eslintConfig": {

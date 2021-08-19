@@ -202,6 +202,7 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
           {selectedDate.replace(/-/g, '/')}
         </span>
         <button
+          title='Clear Date'
           className={`ml-4 ${
             selectedDate !== 'yyyy/mm/dd' ? 'block' : 'hidden'
           }`}
@@ -239,7 +240,7 @@ export const Datepicker: FunctionComponent<DatepickerProps> = (
               </div>
             </div>
           </div>
-          <div className='grid grid-cols-7 gap-1 text-center font-bold mb-2'>
+          <div className='datepicker__days-of-the-week grid grid-cols-7 gap-1 text-center font-bold mb-2'>
             {renderWeekDays()}
           </div>
           <div className='datepicker__grid grid grid-cols-7 grid-rows-6 gap-1'>
