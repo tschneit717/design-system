@@ -15,7 +15,7 @@ export const Headline: FunctionComponent<HeadlineProps> = (
   const HeadlineTitle = (
     headlineProps: HeadlineProps['titleTage']
   ): JSX.Element => {
-    const { titleTag: HeadlineTag = 'h2', children, className } = headlineProps;
+    const { titleTag: HeadlineTag, children, className } = headlineProps;
     return <HeadlineTag className={className}>{children}</HeadlineTag>;
   };
   return (

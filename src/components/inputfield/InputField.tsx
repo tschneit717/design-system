@@ -1,5 +1,11 @@
-import { PropsWithChildren, FunctionComponent } from 'react';
-
+import { useState } from 'react';
+import {
+  PropsWithChildren,
+  FunctionComponent,
+  ChangeEvent,
+  FormEvent,
+} from 'react';
+import useForm from '../../utils/useForm';
 export interface InputFieldProps extends PropsWithChildren<any> {
   name: string;
   label: string;
@@ -16,10 +22,19 @@ export const InputField: FunctionComponent<InputFieldProps> = ({
   type,
   placeholder,
   testId,
-  handleChange,
   value,
+  handleChange,
   isRequired = false,
 }: InputFieldProps) => {
+  const [fieldValue, setFieldValue] = useState<string>('');
+
+  const manageUpdate = (e: FormEvent<HTMLInputElement>) => {
+    if (handleChange) {
+      handleChange(e);
+    } else {
+      setFieldValue(e.currentTarget.value);
+    }
+  };
   return (
     <label
       data-testid={testId}
@@ -31,10 +46,10 @@ export const InputField: FunctionComponent<InputFieldProps> = ({
         name={name.toLowerCase()}
         type={type}
         required={isRequired}
-        value={value}
+        onChange={(e) => manageUpdate(e)}
+        value={handleChange && value ? value : fieldValue}
         data-testid={`input-for-${name}`}
         placeholder={placeholder}
-        onChange={handleChange ? (e) => handleChange(e) : () => null}
       />
     </label>
   );

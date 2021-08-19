@@ -3,14 +3,14 @@ import { useState } from 'react';
 export default function useForm(initial = {}) {
   const [inputs, setInputs] = useState<any>(initial);
   function handleChange(e: {
-    target: { files?: any; value?: any; name?: any; type?: any };
+    currentTarget: { files?: any; value?: any; name?: any; type?: any };
   }) {
-    let { value, name, type } = e.target;
+    let { value, name, type } = e.currentTarget;
     if (type === 'number') {
       value = +value;
     }
     if (type === 'file') {
-      value[0] = e.target.files;
+      value[0] = e.currentTarget.files;
     }
     setInputs({
       ...inputs,

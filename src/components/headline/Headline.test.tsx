@@ -1,5 +1,4 @@
 import { Headline } from './Headline';
-import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { cleanup } from '@testing-library/react';
@@ -12,8 +11,6 @@ describe('Headline ->', () => {
   const HEADLINE_ALIGNMENT = 'center';
   const HEADLINE_TITLE_TAG = 'h2';
   const HEADLINE_FONT_SIZE = '2xl';
-
-  beforeEach(() => {});
 
   afterEach(() => {
     cleanup();
