@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "react-scripts test --coverage --watchAll",
+    "test:no-coverage": "react-scripts test",
     "build:css": "postcss src/assets/styles/tailwind.css -o dist/tailwind.css",
     "dev": "parcel serve ./public/index.html",
     "atlas": "parcel serve ./public/atlas.html --port 1111",

@@ -335,10 +335,48 @@ const inputFields = [
   {
     name: 'product',
     title: 'Product',
-    sourceCode: '<Product></Product>',
+    sourceCode: `const options = [
+  {
+    text: 'Red',
+    value: 'Red',
+    image: 'https://via.placeholder.com/150x150',
+  },
+  {
+    text: 'Blue',
+    value: 'Blue',
+    image: 'https://via.placeholder.com/150x150',
+  },
+];
+  
+<Product
+  productTitle='Product Title'
+  productDescription='Product Description'
+  imageLink='https://via.placeholder.com/400x500'
+  price=9999
+  amountLimit=5
+  optionsTitle='Color'
+  options={options}>
+</Product>`,
     component: Product,
     details: {
-      text: 'Product text',
+      productTitle: 'Product Title',
+      productDescription: `Ipsam eum ut magnam et voluptas. Consequatur perferendis dolorem mollitia distinctio facilis maiores qui. Est temporibus excepturi optio ipsum earum vitae et. Tenetur et officia quae dolore nobis quia quia labore. <br>Et rerum maxime et eaque quia sed id. Eos doloremque repellendus nam cum ut. Minima vel rerum voluptates officia facere nemo quo. Quia at rerum doloribus culpa quia. Voluptas fugiat possimus quas aspernatur.`,
+      imageLink: 'https://via.placeholder.com/400x500',
+      price: 1004,
+      amountLimit: 5,
+      optionsTitle: 'Color',
+      options: [
+        {
+          text: 'Red',
+          value: 'Red',
+          image: 'https://via.placeholder.com/150x150',
+        },
+        {
+          text: 'Blue',
+          value: 'Blue',
+          image: 'https://via.placeholder.com/150x150',
+        },
+      ],
     },
   },
   {
