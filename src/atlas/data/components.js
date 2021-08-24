@@ -310,28 +310,28 @@ const inputFields = [
       ],
     },
   },
-  // {
-  //   name: 'nav',
-  //   title: 'Nav',
-  // sourceCode: '<Nav></Nav>',
-  // component: Nav,
-  //   details: {
-  //     navItems: [
-  //       {
-  //         link: '#',
-  //         text: 'Home',
-  //       },
-  //       {
-  //         link: '#',
-  //         text: 'About',
-  //       },
-  //       {
-  //         link: '#',
-  //         text: 'Products',
-  //       },
-  //     ],
-  //   },
-  // },
+  {
+    name: 'nav',
+    title: 'Nav',
+    sourceCode: '<Nav></Nav>',
+    component: Nav,
+    details: {
+      navItems: [
+        {
+          link: '#',
+          text: 'Home',
+        },
+        {
+          link: '#',
+          text: 'About',
+        },
+        {
+          link: '#',
+          text: 'Products',
+        },
+      ],
+    },
+  },
   {
     name: 'product',
     title: 'Product',
@@ -385,7 +385,33 @@ const inputFields = [
     sourceCode: '<Product></Product>',
     component: ProductList,
     details: {
-      text: 'Porduct List text',
+      title: 'Porduct List text',
+      products: [
+        {
+          title: 'Product 1',
+          image: 'https://via.placeholder.com/150x150',
+          price: 1099,
+          slug: 'product-1',
+        },
+        {
+          title: 'Product 2',
+          image: 'https://via.placeholder.com/150x150',
+          price: 4522,
+          slug: 'product-2',
+        },
+        {
+          title: 'Product 3',
+          image: 'https://via.placeholder.com/150x150',
+          price: 10122,
+          slug: 'product-3',
+        },
+        {
+          title: 'Product 4',
+          image: 'https://via.placeholder.com/150x150',
+          price: 2000,
+          slug: 'product-4',
+        },
+      ],
     },
   },
   {
