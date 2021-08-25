@@ -429,7 +429,45 @@ const inputFields = [
     sourceCode: '<Tab></Tab>',
     component: Tab,
     details: {
-      text: 'Tab text',
+      tabOptions: [
+        {
+          title: 'Tab 1',
+          content: (
+            <p>
+              Ipsam eum ut magnam et voluptas. Consequatur perferendis dolorem
+              mollitia distinctio facilis maiores qui. Est temporibus excepturi
+              optio ipsum earum vitae et. Tenetur et officia quae dolore nobis
+              quia quia labore. <br />
+              Et rerum maxime et eaque quia sed id. Eos doloremque repellendus
+              nam cum ut. Minima vel rerum voluptates officia facere nemo quo.
+              Quia at rerum doloribus culpa quia. Voluptas fugiat possimus quas
+              aspernatur.
+            </p>
+          ),
+        },
+        {
+          title: 'Tab 2',
+          content: (
+            <p>
+              Et rerum maxime et eaque quia sed id. Eos doloremque repellendus
+              nam cum ut. Minima vel rerum voluptates officia facere nemo quo.
+              Quia at rerum doloribus culpa quia. Voluptas fugiat possimus quas
+              aspernatur.
+            </p>
+          ),
+        },
+        {
+          title: 'Tab 3',
+          content: (
+            <p>
+              Et rerum maxime et eaque quia sed id. Eos doloremque repellendus
+              nam cum ut. Minima vel rerum voluptates officia facere nemo quo.
+              Quia at rerum doloribus culpa quia. Voluptas fugiat possimus quas
+              aspernatur.
+            </p>
+          ),
+        },
+      ],
     },
   },
   {
