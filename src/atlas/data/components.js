@@ -17,6 +17,7 @@ import { Nav } from '../../components/nav/Nav';
 import { Product } from '../../components/product/Product';
 import { ProductList } from '../../components/productlist/ProductList';
 import { Profile } from '../../components/profile/Profile';
+import { Search } from '../../components/search/Search';
 import { Tab } from '../../components/tab/Tab';
 import { Text } from '../../components/text/Text';
 
@@ -421,6 +422,15 @@ const inputFields = [
     component: Profile,
     details: {
       text: 'Profile text',
+    },
+  },
+  {
+    name: 'search',
+    title: 'Search',
+    sourceCode: '<Search></Search>',
+    component: Search,
+    details: {
+      dataSource: 'https://api.sampleapis.com/futurama/episodes',
     },
   },
   {
