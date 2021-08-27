@@ -4,7 +4,7 @@ import './../assets/styles/index.css';
 import { AtlasApp } from './AtlasApp';
 
 // Start the mocking conditionally.
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && window.location.port === '1111') {
   const { worker } = require('./../utils/mocks/browser');
   worker.start();
 }

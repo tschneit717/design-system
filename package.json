@@ -7,6 +7,7 @@
     "test": "react-scripts test --coverage --watchAll",
     "test:no-coverage": "react-scripts test",
     "build:css": "postcss src/assets/styles/tailwind.css -o dist/tailwind.css",
+    "update-mock": "npx msw init dist --no-save",
     "dev": "parcel serve ./public/index.html",
     "atlas": "parcel serve ./public/atlas.html --port 1111",
     "start": "concurrently \"npm run dev\" \"npm run atlas\""
@@ -77,5 +78,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

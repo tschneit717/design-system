@@ -15,6 +15,7 @@
 /.cache
 
 # misc
+.env
 todo.md
 .DS_Store
 .env.local
