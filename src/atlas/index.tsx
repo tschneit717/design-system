@@ -5,7 +5,7 @@ import { AtlasApp } from './AtlasApp';
 
 // Start the mocking conditionally.
 if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./utils/mocks/browser');
+  const { worker } = require('./../utils/mocks/browser');
   worker.start();
 }
 

@@ -50,7 +50,7 @@ export const Search = ({ dataSource }: SearchProps) => {
   };
 
   return (
-    <>
+    <div className='flex'>
       <input
         type='text'
         name='search'
@@ -67,6 +67,6 @@ export const Search = ({ dataSource }: SearchProps) => {
         <BiSearch></BiSearch>
       </Link>
       {renderTypeAhead()}
-    </>
+    </div>
   );
 };
